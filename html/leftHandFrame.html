@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>三级下拉菜单</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        body, * {
+            margin: 0px;
+            padding: 0px;
+            font-size: 0px;
+            color: #4c4c49;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+        }
+
+        .nav {
+            width: 100%;
+            height: 60px;
+            border: 0px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            background-color: #eec805;
+        }
+
+        .nav > ul {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .nav > ul:after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        .nav > ul > li {
+            display: block;
+            width: 140px;
+            height: 100%;
+            padding-left: 20px;
+            float: left;
+            text-align: center;
+            background-position: 21px 22px;
+        }
+
+        .nav > ul > li:hover {
+            background-color: #ee1715;
+        }
+
+        .nav > ul > li a {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            padding: 10px 20px;
+            font-size: 0.5px;
+            line-height: 40px;
+            text-decoration: none;
+        }
+
+        .nav > ul > li ul {
+            display: none;
+        }
+
+        .nav > ul > li:hover > a + ul { /*鼠标划过一级菜单的时候二级菜单显示*/
+            display: block;
+        }
+
+        .nav > ul > li > ul {
+            width: 160px;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            position: relative;
+            top: 0px;
+            left: -20px;
+        }
+
+        .nav > ul > li > ul > li, .nav > ul > li > ul > li > ul > li {
+            display: block;
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav > ul > li > ul > li:last-child, .nav > ul > li > ul > li > ul > li:last-child {
+            border: 0px;
+        }
+
+        .nav > ul > li > ul > li:hover, .nav > ul > li > ul > li > ul > li:hover { /*与用户的交互不能少*/
+            background: #59ff43;
+        }
+
+        .nav > ul > li > ul > li:hover ul { /*鼠标划过二级菜单的时候对应的三级菜单显示*/
+            display: block;
+        }
+
+        .nav > ul > li > ul > li > ul {
+            width: 160px;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            position: relative;
+            top: -60px;
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="banner"></div>
+<div class="nav">
+    <ul>
+        <li>
+            <a href="#">Frozen Food</a>
+            <ul>
+                <li>
+                    <a href="#">Sea Food</a>
+                    <ul>
+                        <li><a href="../php/showProductDetail.php?ID=Fish_Fingers_large" target="_self">Fish Fingers(large)</a></li>
+                        <li><a href="../php/showProductDetail.php?ID=Fish_Fingers_small" target="_self">Fish Fingers(small)</a></li>
+                        <li><a href="../php/showProductDetail.php?ID=Shelled_Prawn" target="_self">Shelled Prawn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Milk Products</a>
+                    <ul>
+                        <li><a href="#a" target="_self">Tub Ice Cream(1 lit)</a></li>
+                        <li><a href="#a" target="_self">Tub Ice Cream(2 lit)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Other</a>
+                    <ul>
+                        <li><a href="#a" target="_self">Hamburger</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Fresh Food</a>
+        </li>
+        <li>
+            <a href="#">Beverages</a>
+        </li>
+        <li>
+            <a href="#">Home Health</a>
+        </li>
+        <li>
+            <a href="#">Pet Food</a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/ajax.js"></script>
+</body>
+</html>

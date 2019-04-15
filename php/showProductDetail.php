@@ -1,84 +1,47 @@
 <?php
-// Start the session
-session_start();
-?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-</head>
-<body>
-
-<?php
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\" />";
 if (isset($_REQUEST['data'])) {
-    // If receive products ID then, retrive this ID in database
-    $ID = $_REQUEST['data'];
-    // Store current product ID in session;
-    $_SESSION["currentID"] = $ID;
 
-    //Procedural style
-    $connection = mysqli_connect('127.0.0.1:3306', 'root', 'zengweihan', 'assignment');
-    $query_string = "select * from products where (product_id = $ID)";
+    // if get the request data from the html, just try to get the data from the database
 
+//    $connection = mysqli_connect('rerun.it.uts.edu.au', 'potiro', 'pcXZb(kL', 'poti');
+    $connection = mysqli_connect('localhost:3306', 'root', 'zengweihan', 'assignment');
+
+    $id = $_REQUEST['data'];
+
+
+    $query_string = "select * from products where product_id = " . $id;
     $result = mysqli_query($connection, $query_string);
+
 
     $num_rows = mysqli_num_rows($result);
     if ($num_rows > 0) {
+        print "<table border='1'> ";
 
         if ($a_row = mysqli_fetch_array($result)) {
-            print "<table class='product-table' border='1'>";
+            print "<br>";
 
-            print "<tr>";
-            print "<th>product_id</th>";
-            print "<th>product_name</th>";
-            print "<th>unit_price</th>";
-            print "<th>unit_quantity</th>";
-            print "<th>in_stock</th>";
-            print "</tr>";
+            {
+                echo $a_row["product_name"] . "<br>";
+                echo $a_row["unit_price"] . "<br>";
+                echo $a_row["unit_quantity"] . "<br>";
+                echo $a_row["in_stock"] . "<br>";
 
-
-            print "<tr>";
-            echo "<td>" . $a_row["product_id"] . "</td>";
-            echo "<td>" . $a_row["product_name"] . "</td>";
-            echo "<td>" . $a_row["unit_price"] . "</td>";
-            echo "<td>" . $a_row["unit_quantity"] . "</td>";
-            echo "<td>" . $a_row["in_stock"] . "</td>";
-            print "</tr>";
-
-            print "</table>";
-
+            }
         }
-        // display a button here ?
-        print "<form id=\"myForm\" action=\"../php/Cart.php\">";
-        print "<input type=\"button\" id=\"add-button\" value=\"ADD\" class=\"add-button\" onsubmit=\"return myFunction()\">";
-        print "</form>";
+
+        print "</table>";
+
+
+        // display a button here
+        print "<button type=\"button\" style=\"position:absolute;bottom:8px;right:16px;font-size:18px;background-color:#4CAF50;\">Add</button>";
     }
     mysqli_close($connection);
 
+
 } else {
-    echo "No data sent to this page.";
+    echo "This is top-right.";
 }
+
+
 ?>
-
-<p id="demo"></p>
-<p id="demo1"></p>
-<script>
-    var counter = 0;
-
-    // document.getElementById("add-button").onclick=myFunction;
-    function myFunction() {
-        counter += 1;
-        document.getElementById("demo").innerHTML = counter;
-    }
-</script>
-
-
-</body>
-</html>

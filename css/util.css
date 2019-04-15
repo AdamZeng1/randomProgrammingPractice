@@ -12,13 +12,13 @@ body {
 
 
 /************* set the slide bar ***************/
-/*body, * {*/
-    /*margin: 0px;*/
-    /*padding: 0px;*/
-    /*font-size: 0px;*/
-    /*color: #4c4c49;*/
-    /*box-sizing: border-box;*/
-/*}*/
+body, * {
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    color: #4c4c49;
+    box-sizing: border-box;
+}
 
 ul {
     list-style: none;
