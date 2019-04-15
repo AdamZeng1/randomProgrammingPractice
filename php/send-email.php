@@ -8,4 +8,4 @@ echo $_REQUEST['state'];
 echo $_REQUEST['country'];
 //echo $mgs;
 mail($_REQUEST['email'],"purchase invoice","test");
-?> 
+?>
