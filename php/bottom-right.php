@@ -15,7 +15,7 @@ echo $_SESSION["currentID"];
 <body>
 <?php
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\" />";
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/mystyle.css\" />";
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\" />";
 ?>
 <div class="row">
 
