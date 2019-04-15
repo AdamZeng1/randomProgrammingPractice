@@ -21,22 +21,6 @@ session_start();
 
 <?php
 
-
-    class Product {
-        var $product_id;
-        var $product_name;
-        var $unit_price;
-        var $unit_quantity;
-        var $products_price;
-        function Product($item_name, $item_quantity) {
-            $this->item = $item_name;
-            $this->quantity = $item_quantity;
-        }
-        function product_price(){
-            return $products_price * $unit_quantity;
-        }
-    }
-
     if (isset($_REQUEST['data'])) {
 
         // if get the request data from the html, just try to get the data from the database
@@ -122,7 +106,7 @@ session_start();
             return false;
 
         } else {
-            document.getElementById("demo").innerHTML = quantity;
+            // document.getElementById("demo").innerHTML = quantity;
             return true;
         }
         return true;

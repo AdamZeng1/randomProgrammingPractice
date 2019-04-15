@@ -8,7 +8,10 @@ if ($_REQUEST["clear"] == 1) {
     unset($_SESSION["showCheckout"]);
 }
 if(isset($_SESSION["currentProduct"])){
-    $_SESSION["products"][] = $_SESSION["currentProduct"];
+    $number = $_REQUEST["quantity"];
+    for ($i=0; $i < $number ; $i++) {
+        $_SESSION["products"][] = $_SESSION["currentProduct"];
+    }
 }
 
 ?>
