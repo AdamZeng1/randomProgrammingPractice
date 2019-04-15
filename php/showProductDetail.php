@@ -12,11 +12,13 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <!-- add css sheet -->
+    <?php echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\" />"; ?>
 </head>
 <body>
 
 <?php
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\" />";
+
 
 if (isset($_REQUEST['data'])) {
 
@@ -60,11 +62,9 @@ if (isset($_REQUEST['data'])) {
 
         print "</table>";
 
+        // add $a_row to $_SESSION["currentProduct"] = $a_row;
+        $_SESSION["currentProduct"] = $a_row;
 
-        // display a button here
-//        print "<form id=\"myForm\" action=\"bottom-right.php\">";
-//        print "<input type=\"button\" id=\"add-button\" value=\"ADD\" class=\"add-button\" onsubmit=\"return myFunction()\">";
-//        print "</form>";
     }
     mysqli_close($connection);
 
@@ -76,7 +76,7 @@ if (isset($_REQUEST['data'])) {
 ?>
 
 <div class="linkbtn">
-    <a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
+    <a href="bottom-right.php" id="addbtn" target="bottom-right" type="button" class="add-button">
         ADD
     </a>
 </div>
@@ -86,7 +86,8 @@ if (isset($_REQUEST['data'])) {
 <script>
     var counter = 0;
 
-    document.getElementById("addbtn").onclick=myFunction;
+    document.getElementById("addbtn").onclick = myFunction;
+
     // document.getElementById("add-button").onclick=myFunction;
     function myFunction() {
         counter += 1;
