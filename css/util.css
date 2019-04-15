@@ -14,8 +14,8 @@ body {
 /************* set the slide bar ***************/
 body, * {
     margin: 0px;
-    padding: 0px;
-    font-size: 0px;
+    padding: 1px;
+    font-size: 1px;
     color: #4c4c49;
     box-sizing: border-box;
 }
@@ -176,3 +176,11 @@ ul {
 }
 
 
+/********* alter p font size *************/
+.side .category {
+    font-size: 30px;
+}
+
+.main .main-area {
+    font-size: 30px;
+}
