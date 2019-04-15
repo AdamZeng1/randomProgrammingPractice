@@ -13,7 +13,9 @@ session_start();
     <title>Document</title>
 
     <!-- add css sheet -->
+    <?php echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>"; ?>
     <?php echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\" />"; ?>
+    <?php echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/checkoutForm.css\" />"; ?>
 </head>
 <body>
 
@@ -65,21 +67,27 @@ if (isset($_REQUEST['data'])) {
         // add $a_row to $_SESSION["currentProduct"] = $a_row;
         $_SESSION["currentProduct"] = $a_row;
 
+        echo '<div class="linkbtn">
+						<a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
+						ADD
+						</a>
+					  </div>';
+
+
     }
     mysqli_close($connection);
 
 
-} else {
-    echo "This is top-right.";
+} elseif(isset($_SESSION['showCheckout']) && ($_SESSION['showCheckout'] == 1) &&(count($_SESSION["products"])) )
+{
+    require('checkoutform.php');
+}else
+{
+    echo "Please select products on the left menus, and add to the shopping cart";
 }
-
 ?>
 
-<div class="linkbtn">
-    <a href="bottom-right.php" id="addbtn" target="bottom-right" type="button" class="add-button">
-        ADD
-    </a>
-</div>
+
 
 <!--<p id="demo"></p>-->
 <!--<p id="demo1"></p>-->

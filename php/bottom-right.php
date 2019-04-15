@@ -5,6 +5,7 @@ session_start();
 if ($_REQUEST["clear"] == 1) {
     unset ($_SESSION['products']);
     unset($_SESSION["currentProduct"]);
+    unset($_SESSION["showCheckout"]);
 }
 if(isset($_SESSION["currentProduct"])){
     $_SESSION["products"][] = $_SESSION["currentProduct"];
@@ -31,13 +32,15 @@ if(isset($_SESSION["currentProduct"])){
 </head>
 <body>
 
+
+<p id="demo"></p>
 <div id="info-banner" style="display:none" class="alert alert-info">
     <strong>Info!</strong> No items!
     <br>Click 'CHECKOUT' button to hide this info.
 </div>
 
 <a href="bottom-right.php?clear=1"   target="bottom-right" class="button_red" style="float:right">CLEAR</a>
-<button class="button" id="checkout-btn">CHECKOUT</button>
+<a href="showProductDetail.php" target="top-right" class="button" id="checkout-btn">CHECKOUT</a>
 
 <div class="row">
 
@@ -76,8 +79,15 @@ if(isset($_SESSION["currentProduct"])){
             var popup = document.getElementById("info-banner");
             popup.classList.toggle("show");
 
-        } else {
+            <?php
+            $_SESSION['showCheckout'] = 0;
+            unset($_SESSION['showCheckout']);
+            ?>
 
+        } else {
+            <?php
+            $_SESSION['showCheckout'] = 1;
+            ?>
         }
     }
 </script>
