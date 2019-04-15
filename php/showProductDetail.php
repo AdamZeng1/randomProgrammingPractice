@@ -22,73 +22,113 @@ session_start();
 <?php
 
 
-if (isset($_REQUEST['data'])) {
-
-    // if get the request data from the html, just try to get the data from the database
-
-//    $connection = mysqli_connect('rerun.it.uts.edu.au', 'potiro', 'pcXZb(kL', 'poti');
-    $connection = mysqli_connect('localhost:3306', 'root', 'zengweihan', 'assignment');
-
-    $ID = $_REQUEST['data'];
-
-    // Store current product ID in session;
-    $_SESSION["currentID"] = $ID;
-
-
-    $query_string = "select * from products where product_id = " . $ID;
-    $result = mysqli_query($connection, $query_string);
-
-    $num_rows = mysqli_num_rows($result);
-
-    if ($num_rows > 0) {
-        if ($a_row = mysqli_fetch_array($result)) {
-            print "<table class='product-table' border='1'>";
-
-            print "<tr>";
-            print "<th>product_id</th>";
-            print "<th>product_name</th>";
-            print "<th>unit_price</th>";
-            print "<th>unit_quantity</th>";
-            print "<th>in_stock</th>";
-            print "</tr>";
-
-
-            print "<tr>";
-            echo "<td>" . $a_row["product_id"] . "</td>";
-            echo "<td>" . $a_row["product_name"] . "</td>";
-            echo "<td>" . $a_row["unit_price"] . "</td>";
-            echo "<td>" . $a_row["unit_quantity"] . "</td>";
-            echo "<td>" . $a_row["in_stock"] . "</td>";
-            print "</tr>";
+    class Product {
+        var $product_id;
+        var $product_name;
+        var $unit_price;
+        var $unit_quantity;
+        var $products_price;
+        function Product($item_name, $item_quantity) {
+            $this->item = $item_name;
+            $this->quantity = $item_quantity;
         }
-
-        print "</table>";
-
-        // add $a_row to $_SESSION["currentProduct"] = $a_row;
-        $_SESSION["currentProduct"] = $a_row;
-
-        echo '<div class="linkbtn">
-						<a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
-						ADD
-						</a>
-					  </div>';
-
-
+        function product_price(){
+            return $products_price * $unit_quantity;
+        }
     }
-    mysqli_close($connection);
+
+    if (isset($_REQUEST['data'])) {
+
+        // if get the request data from the html, just try to get the data from the database
+
+    //    $connection = mysqli_connect('rerun.it.uts.edu.au', 'potiro', 'pcXZb(kL', 'poti');
+        $connection = mysqli_connect('localhost:3306', 'root', 'zengweihan', 'assignment');
+
+        $ID = $_REQUEST['data'];
+
+        // Store current product ID in session;
+        $_SESSION["currentID"] = $ID;
 
 
-} elseif(isset($_SESSION['showCheckout']) && ($_SESSION['showCheckout'] == 1) &&(count($_SESSION["products"])) )
-{
-    require('checkoutform.php');
-}else
-{
-    echo "Please select products on the left menus, and add to the shopping cart";
-}
+        $query_string = "select * from products where product_id = " . $ID;
+        $result = mysqli_query($connection, $query_string);
+
+        $num_rows = mysqli_num_rows($result);
+
+        if ($num_rows > 0) {
+            if ($a_row = mysqli_fetch_array($result)) {
+                print "<table class='product-table' border='1'>";
+
+                print "<tr>";
+                print "<th>product_id</th>";
+                print "<th>product_name</th>";
+                print "<th>unit_price</th>";
+                print "<th>unit_quantity</th>";
+                print "<th>in_stock</th>";
+                print "</tr>";
+
+
+                print "<tr>";
+                echo "<td>" . $a_row["product_id"] . "</td>";
+                echo "<td>" . $a_row["product_name"] . "</td>";
+                echo "<td>" . $a_row["unit_price"] . "</td>";
+                echo "<td>" . $a_row["unit_quantity"] . "</td>";
+                echo "<td>" . $a_row["in_stock"] . "</td>";
+                print "</tr>";
+            }
+
+            print "</table>";
+
+            // add $a_row to $_SESSION["currentProduct"] = $a_row;
+            $_SESSION["currentProduct"] = $a_row;
+            //echo '<p id="demo"></p>';
+            // Input number
+            echo '
+				<div>
+				<form action="bottom-right.php" method="get" target="bottom-right" onsubmit="return validate_quantity()">
+					Quantity (between 1 and 20):
+					<input type="number" id="quantity" name="quantity" min="1" value="1">
+					<input type="submit" value="ADD">
+				 </form>
+				 </div>';
+
+            echo '<div class="linkbtn">
+                            <a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
+                            ADD
+                            </a>
+                          </div>';
+
+
+        }
+        mysqli_close($connection);
+
+
+    } elseif(isset($_SESSION['showCheckout']) && ($_SESSION['showCheckout'] == 1) &&(count($_SESSION["products"])) )
+    {
+        require('checkoutform.php');
+    }else
+    {
+        echo "Please select products on the left menus, and add to the shopping cart";
+    }
 ?>
 
 
+<script>
+    function validate_quantity(){
+        var quantity = document.getElementById("quantity").value;
+        // False
+        if (quantity > 20) {
+            alert("quantity should less than 20");
+            return false;
 
+        } else {
+            document.getElementById("demo").innerHTML = quantity;
+            return true;
+        }
+        return true;
+    }
+
+</script>
 <!--<p id="demo"></p>-->
 <!--<p id="demo1"></p>-->
 <!--<script>-->

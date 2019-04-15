@@ -51,7 +51,7 @@ if(isset($_SESSION["currentProduct"])){
             <!-- print the information of each product-->
             <?php
             foreach($_SESSION["products"] as $product){ ?>
-                <p><a href="#"><?php echo $product["product_name"];?></a><span class="price">$<?php echo $product["unit_price"];?></span></p>
+                <p><a href="#"><?php echo $product["product_name"];?></a> * 1<span class="price">$<?php echo $product["unit_price"];?></span></p>
             <?php } ?>
 
             <hr>
