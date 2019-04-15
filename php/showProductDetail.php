@@ -81,19 +81,19 @@ if (isset($_REQUEST['data'])) {
     </a>
 </div>
 
-<p id="demo"></p>
-<p id="demo1"></p>
-<script>
-    var counter = 0;
-
-    document.getElementById("addbtn").onclick = myFunction;
-
-    // document.getElementById("add-button").onclick=myFunction;
-    function myFunction() {
-        counter += 1;
-        document.getElementById("demo").innerHTML = counter;
-    }
-</script>
+<!--<p id="demo"></p>-->
+<!--<p id="demo1"></p>-->
+<!--<script>-->
+<!--    var counter = 0;-->
+<!---->
+<!--    document.getElementById("addbtn").onclick = myFunction;-->
+<!---->
+<!--    // document.getElementById("add-button").onclick=myFunction;-->
+<!--    function myFunction() {-->
+<!--        counter += 1;-->
+<!--        document.getElementById("demo").innerHTML = counter;-->
+<!--    }-->
+<!--</script>-->
 
 </body>
 </html>
