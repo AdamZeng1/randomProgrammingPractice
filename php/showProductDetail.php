@@ -62,9 +62,9 @@ if (isset($_REQUEST['data'])) {
 
 
         // display a button here
-        print "<form id=\"myForm\" action=\"bottom-right.php\">";
-        print "<input type=\"button\" id=\"add-button\" value=\"ADD\" class=\"add-button\" onsubmit=\"return myFunction()\">";
-        print "</form>";
+//        print "<form id=\"myForm\" action=\"bottom-right.php\">";
+//        print "<input type=\"button\" id=\"add-button\" value=\"ADD\" class=\"add-button\" onsubmit=\"return myFunction()\">";
+//        print "</form>";
     }
     mysqli_close($connection);
 
@@ -75,11 +75,18 @@ if (isset($_REQUEST['data'])) {
 
 ?>
 
+<div class="linkbtn">
+    <a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
+        ADD
+    </a>
+</div>
+
 <p id="demo"></p>
 <p id="demo1"></p>
 <script>
     var counter = 0;
 
+    document.getElementById("addbtn").onclick=myFunction;
     // document.getElementById("add-button").onclick=myFunction;
     function myFunction() {
         counter += 1;
