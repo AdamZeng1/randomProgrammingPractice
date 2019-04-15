@@ -181,9 +181,9 @@ ul {
     font-size: 30px;
 }
 
-.main .main-area {
-    font-size: 30px;
-}
+/*.main .main-area {*/
+    /*font-size: 30px;*/
+/*}*/
 
 .row {
     display: -ms-flexbox; /* IE10 */

@@ -27,11 +27,8 @@ if(isset($_SESSION["currentProduct"])){
 </head>
 <body>
 
-<div class="linkbtn">
-    <a href="bottom-right.php?clear=1"   target="bottom-right" type="button" >
-        Clear
-    </a>
-</div>
+<a href="bottom-right.php?clear=1"   target="bottom-right" class="button" style="float:right">CLEAR</a>
+<button class="button">CHECKOUT</button>
 
 <div class="row">
 
