@@ -3,17 +3,54 @@
 session_start();
 
 if ($_REQUEST["clear"] == 1) {
-    unset ($_SESSION['products']);
     unset($_SESSION["currentProduct"]);
     unset($_SESSION["showCheckout"]);
+    unset($_SESSION['itmes']);
 }
 if(isset($_SESSION["currentProduct"])){
-    $number = $_REQUEST["quantity"];
-    for ($i=0; $i < $number ; $i++) {
-        $_SESSION["products"][] = $_SESSION["currentProduct"];
+    ////////////////////////////////////////
+    if (!isset($_SESSION["itmes"])) {
+        $id = $_SESSION["currentProduct"][product_id];
+        $_SESSION["itmes"][$id][product_id] = $_SESSION["currentProduct"][product_id];
+        $_SESSION["itmes"][$id][product_name] = $_SESSION["currentProduct"][product_name];
+        $_SESSION["itmes"][$id][unit_price] = $_SESSION["currentProduct"][unit_price];
+        $_SESSION["itmes"][$id][unit_quantity] = $_SESSION["currentProduct"][unit_quantity];
+        $_SESSION["itmes"][$id][quantity] = $_REQUEST["quantity"];
+    }else
+    {
+        $serchid = $_SESSION["currentProduct"][product_id];
+        $find = 0;
+        foreach ($_SESSION["itmes"] as $item) {
+            if ($item["product_id"] == $serchid) {
+                //Update quntity
+                $_SESSION["itmes"][$serchid][quantity] = $_REQUEST["quantity"];
+                $t = $_SESSION["itmes"][$serchid][quantity];
+                //not refresh current i
+                // echo "find it quantity is :".$t."<br>";
+                $find = 1;
+                break;
+            }
+        }
+        if ($find == 0) {
+            $id = $_SESSION["currentProduct"][product_id];
+            $_SESSION["itmes"][$id][product_id] = $_SESSION["currentProduct"][product_id];
+            $_SESSION["itmes"][$id][product_name] = $_SESSION["currentProduct"][product_name];
+            $_SESSION["itmes"][$id][unit_price] = $_SESSION["currentProduct"][unit_price];
+            $_SESSION["itmes"][$id][unit_quantity] = $_SESSION["currentProduct"][unit_quantity];
+            $_SESSION["itmes"][$id][quantity] = $_REQUEST["quantity"];
+            //echo "new id is:".$id."<br>";
+        }
+        $number = 0;
+        foreach ($_SESSION["itmes"] as $item){
+            // echo $item[product_id]."...$item[quantity]"."</br>";
+            $number += $item[quantity];
+        }
     }
 }
-
+$total_number = 0;
+foreach ($_SESSION["itmes"] as $item){
+    $total_number += $item[quantity];
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,20 +86,20 @@ if(isset($_SESSION["currentProduct"])){
 
     <div class="col-25">
         <div class="container">
-            <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i><b id='number-items'><?php echo count($_SESSION["products"]);?></b></span></h4>
+            <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i><b id='number-items'><?php echo $total_number;?></b></span></h4>
 
             <!-- print the information of each product-->
             <?php
-            foreach($_SESSION["products"] as $product){ ?>
-                <p><a href="#"><?php echo $product["product_name"];?></a> * 1<span class="price">$<?php echo $product["unit_price"];?></span></p>
+            foreach($_SESSION["itmes"] as $product){ ?>
+                <p><a href="#"><?php echo $product["product_name"];?></a> * <?php echo $product["quantity"];?><span class="price">$<?php echo $product["unit_price"];?></span></p>
             <?php } ?>
 
             <hr>
             <p>Total <span class="price" style="color:black"><b>$
             <?php
                 $total = 0;
-                foreach($_SESSION["products"] as $product){
-                    $total += $product["unit_price"];
+                foreach($_SESSION["itmes"] as $product){
+                    $total += $product["unit_price"]*$product["quantity"];
                 }
                 echo $total;
             ?></b></span></p>

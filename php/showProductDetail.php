@@ -76,18 +76,18 @@ session_start();
 				 </form>
 				 </div>';
 
-            echo '<div class="linkbtn">
-                            <a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
-                            ADD
-                            </a>
-                          </div>';
+//            echo '<div class="linkbtn">
+//                            <a href="bottom-right.php"  id="addbtn" target="bottom-right" type="button" class="add-button">
+//                            ADD
+//                            </a>
+//                          </div>';
 
 
         }
         mysqli_close($connection);
 
 
-    } elseif(isset($_SESSION['showCheckout']) && ($_SESSION['showCheckout'] == 1) &&(count($_SESSION["products"])) )
+    } elseif(isset($_SESSION['showCheckout']) && ($_SESSION['showCheckout'] == 1) &&(count($_SESSION["itmes"])) )
     {
         require('checkoutform.php');
     }else
@@ -105,10 +105,7 @@ session_start();
             alert("quantity should less than 20");
             return false;
 
-        } else {
-            // document.getElementById("demo").innerHTML = quantity;
-            return true;
-        }
+        } 
         return true;
     }
 
